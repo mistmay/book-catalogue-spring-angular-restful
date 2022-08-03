@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalService } from '../services/modal.service';
 import { ApiService } from '../api/api.service';
+import { Subscription } from 'rxjs';
+import { Author } from '../model/author';
 
 @Component({
   selector: 'app-form-author',
@@ -26,8 +28,9 @@ import { ApiService } from '../api/api.service';
   styles: [
   ]
 })
-export class FormAuthorComponent implements OnInit {
+export class FormAuthorComponent implements OnInit, OnDestroy {
   form!: FormGroup;
+  subscription!: Subscription;
 
   constructor(private fb: FormBuilder, private modalService: ModalService, private api: ApiService) { }
 
@@ -39,9 +42,15 @@ export class FormAuthorComponent implements OnInit {
   }
 
   addAuthor(): void {
-    this.api.addAuthor({ ...this.form.value });
-    this.form.reset();
-    this.modalService.closeModal();
+    this.subscription = this.api.addAuthor({ ...this.form.value })
+      .subscribe((res: Author) => {
+        this.form.reset();
+        this.modalService.closeModal();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -37,7 +37,7 @@ public class GenreController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
 	@PostMapping("/genre")
 	public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
 		try {

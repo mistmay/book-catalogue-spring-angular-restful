@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-form-genre',
   template: `
    <form class="d-flex flex-column align-items-center gap-3 w-100 p-5 border border-secondary rounded" [formGroup]="form" (ngSubmit)="addGenre()">
-    <h3 class="fw-bold">Add New Author:</h3>
+    <h3 class="fw-bold">Add New Genre:</h3>
     <div class="d-flex justify-content-center align-items-center flex-column">
       <label for="name">Name:</label>
       <span class="text-danger" *ngIf="form.controls['name'].dirty && form.hasError('required', 'name')">*Required<br></span>
