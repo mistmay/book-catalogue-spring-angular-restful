@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalService } from '../services/modal.service';
-import { BookService } from '../services/book.service';
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-form-author',
   template: `
-  <form class="d-flex flex-column align-items-center gap-3 w-100 p-5 border border-secondary rounded" [formGroup]="form" (ngSubmit)="addBook()">
+  <form class="d-flex flex-column align-items-center gap-3 w-100 p-5 border border-secondary rounded" [formGroup]="form" (ngSubmit)="addAuthor()">
     <h3 class="fw-bold">Add New Author:</h3>
     <div class="d-flex justify-content-center align-items-center flex-column">
       <label for="name">Name:</label>
@@ -29,7 +29,7 @@ import { BookService } from '../services/book.service';
 export class FormAuthorComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private modalService: ModalService, private bookService: BookService) { }
+  constructor(private fb: FormBuilder, private modalService: ModalService, private api: ApiService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -38,8 +38,8 @@ export class FormAuthorComponent implements OnInit {
     });
   }
 
-  addBook(): void {
-    this.bookService.addBook({ ...this.form.value });
+  addAuthor(): void {
+    this.api.addAuthor({ ...this.form.value });
     this.form.reset();
     this.modalService.closeModal();
   }
