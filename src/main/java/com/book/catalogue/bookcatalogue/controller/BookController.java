@@ -42,16 +42,6 @@ public class BookController {
 		}
 	}
 
-	@GetMapping("/book/{id}")
-	public ResponseEntity<Book> getBookById(@PathVariable("id") int id) {
-		Optional<Book> bookData = bookRepository.findById(id);
-		if (bookData.isPresent()) {
-			return new ResponseEntity<>(bookData.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
 	@PostMapping("/book")
 	public ResponseEntity<Book> createBook(@RequestBody Book book) {
 		try {
