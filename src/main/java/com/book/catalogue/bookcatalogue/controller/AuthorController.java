@@ -2,14 +2,12 @@ package com.book.catalogue.bookcatalogue.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,25 +28,11 @@ public class AuthorController {
 		try {
 			List<Author> authors = new ArrayList<Author>();
 			authorRepository.findAll().forEach(authors::add);
-			if (authors.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			} else {
-				return new ResponseEntity<>(authors, HttpStatus.OK);
-			}
+			return new ResponseEntity<>(authors, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@GetMapping("/author/{id}")
-	  public ResponseEntity<Author> getAuthorById(@PathVariable("id") int id) {
-	    Optional<Author> authorData = authorRepository.findById(id);
-	    if (authorData.isPresent()) {
-	      return new ResponseEntity<>(authorData.get(), HttpStatus.OK);
-	    } else {
-	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	  }
 
 	@PostMapping("/author")
 	public ResponseEntity<Author> createAuthor(@RequestBody Author author) {

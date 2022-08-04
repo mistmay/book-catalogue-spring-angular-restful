@@ -32,11 +32,7 @@ public class BookController {
 		try {
 			List<Book> books = new ArrayList<Book>();
 			bookRepository.findAll().forEach(books::add);
-			if (books.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			} else {
-				return new ResponseEntity<>(books, HttpStatus.OK);
-			}
+			return new ResponseEntity<>(books, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

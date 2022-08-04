@@ -28,16 +28,12 @@ public class GenreController {
 		try {
 			List<Genre> genres = new ArrayList<Genre>();
 			genreRepository.findAll().forEach(genres::add);
-			if (genres.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			} else {
-				return new ResponseEntity<>(genres, HttpStatus.OK);
-			}
+			return new ResponseEntity<>(genres, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PostMapping("/genre")
 	public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
 		try {

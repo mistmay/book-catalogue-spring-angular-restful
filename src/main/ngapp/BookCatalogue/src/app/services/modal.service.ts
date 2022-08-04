@@ -10,7 +10,7 @@ import { Book } from '../model/book';
 export class ModalService {
   showModal: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   formType: BehaviorSubject<Form> = new BehaviorSubject<Form>('author');
-  isUpdate: BehaviorSubject<[boolean, Book | null]> = new BehaviorSubject<[boolean, Book | null]>([false, null]);
+  isUpdate: BehaviorSubject<[boolean, Book | undefined]> = new BehaviorSubject<[boolean, Book | undefined]>([false, undefined]);
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class ModalService {
     return this.formType.asObservable();
   }
 
-  getIsUpdateObservable(): Observable<[boolean, Book | null]> {
+  getIsUpdateObservable(): Observable<[boolean, Book | undefined]> {
     return this.isUpdate.asObservable();
   }
 
@@ -37,7 +37,7 @@ export class ModalService {
 
   closeModal(): void {
     this.showModal.next(false);
-    this.isUpdate.next([false, null]);
+    this.isUpdate.next([false, undefined]);
   }
 
 }

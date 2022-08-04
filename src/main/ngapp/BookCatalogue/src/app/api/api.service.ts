@@ -25,10 +25,6 @@ export class ApiService {
     return this.http.get<Genre[]>(`${this.url}/genre`);
   }
 
-  getAuthorById(id: number): Observable<Author> {
-    return this.http.get<Author>(`${this.url}/author/${id}`);
-  }
-
   addAuthor(author: Author): Observable<Author> {
     return this.http.post<Author>(`${this.url}/author`, author);
   }

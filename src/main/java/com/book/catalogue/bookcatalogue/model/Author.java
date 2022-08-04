@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "author")
 public class Author {
@@ -26,6 +28,7 @@ public class Author {
 	@Column(name = "surname")
 	private String surname;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
 	private List<Book> books = new ArrayList<>();
 
